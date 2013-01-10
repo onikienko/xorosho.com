@@ -1,0 +1,37 @@
+{
+    "name": "xorosho.com +",
+    "version": "0.5.1",
+    "description": "Плюшки для xorosho.com",
+    "manifest_version": 2,
+    "minimum_chrome_version": "22",
+    "icons": {
+        "128": "i/ico/icon_128.png"
+    },
+
+    "browser_action": {
+        "default_title": "xorosho.com +",
+        "default_icon": "i/ico/icon_19.png",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "background": {
+        "scripts": ["js/lib/jquery-1.8.2.min.js", "js/event_page.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*.xorosho.com/xoroshaya_muzika/*", "http://*.xorosho.com/xoroshee_kino/*"],
+            "css": ["css/inject.css"],
+            "js": ["js/lib/jquery-1.8.2.min.js", "js/inject.js"]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "alarms",
+        "http://*.xorosho.com/*"
+    ],
+    "web_accessible_resources": [
+        "i/rutracker_16x16.ico",
+        "i/ico/icon_19.png"
+    ]
+}

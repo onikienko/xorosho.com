@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Настройки xorosho.com +</title>
+    <link rel="stylesheet" href="css/options.css">
+    <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/options.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <header>
+        <h1><img src="i/ico/icon_128.png" width="60" height="60"> &nbsp; xorosho.com +</h1>
+    </header>
+    <!--<hr>-->
+    <section>
+        <fieldset>
+            <legend>Поиск на rutracker.org</legend>
+            <i>Расширение может встраивать на страницы xorosho.com ссылки для поиска релиза на rutracker.org (вход на rutracker должен быть выполнен)<br>
+                Работает только для релизов в категориях "хорошая музыка" и "хорошее кино". <br><br>
+                Корректная работа поиска зависит от соответсвия заголовка новости опрделенному шаблону. Для большинства
+                новостей все будет работать. В крайнем случае, можно будет откорректировать поисковый запрос уже на самом rutracker.</i><br><br>
+            <label><input type="checkbox" id="opt_top_search_btn"> Отображать ссылку в титульной строке
+                новости</label><br>
+            <img src="i/top_scr.jpg"><br>
+            <hr>
+            <label><input type="checkbox" id="opt_bottom_search_btn"> Отображать ссылку в конце новости</label> <br>
+            <img src="i/bottom_src.jpg">
+        </fieldset>
+        <fieldset>
+            <legend>Проверка новостей</legend>
+            <i>Расширение будет периодически проверять новости на xorosho.com.
+                При появлении новых, на значке расширения появится отметка. Также можно включить звуковое
+                оповещение.</i><br><br>
+            Частота проверки новостей
+            <select id="opt_check_time">
+                <option value="15">15 мин</option>
+                <option value="30">30 мин</option>
+                <option value="60">1 час</option>
+                <option value="120">2 часа</option>
+                <option value="180">3 часа</option>
+                <option value="720">Каждые 12 часов</option>
+                <option value="1440">Каждые 24 часа</option>
+            </select>
+            <hr>
+            Звуковое оповещение о появлении новостей <br><br>
+            <label><input type="radio" id="off" name="opt_sound">Выключено </label>
+            <label><input type="radio" id="s_1" name="opt_sound">Бом </label>
+            <label><input type="radio" id="s_2" name="opt_sound">UFO </label>
+            <label><input type="radio" id="s_3" name="opt_sound">Тинь </label>
+        </fieldset>
+    </section>
+    <footer>
+        dev. by <a href="http://onikienko.pp.ua" target="_blank">M. Onikienko</a>
+    </footer>
+</div>
+</body>
+</html>
