@@ -7,67 +7,64 @@ body {
     color: #666666;
     font-family: Tahoma, sans-serif;
 }
-
 header {
     font-size: 18px;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     margin: 3px;
 }
-
 header div {
     display: inline;
 }
-
 #logo_place img {
     margin-bottom: -5px;
 }
-
 #action_place {
     float: right;
 }
-
 #action_place img {
     cursor: pointer;
     margin-left: 2px;
 }
-
 hr {
     border: none;
     background-color: #e5e5e5;
     height: 1px;
     width: 97%;
 }
-
 section {
     margin: 0 8px;
 }
-
 #search_place input {
     width: 330px;
     padding-left: 5px;
 }
-
 #search_place img {
     margin-bottom: -3px;
     cursor: pointer;
 }
-
 .news_elem {
     font-size: 11px;
     margin-top: 12px;
     color: black;
 }
-
 .news_elem img {
     margin: 5px;
+    width: 100px;
 }
-
+/*прячу смайлы*/
+.news_elem img[src*="http://www.xorosho.com/engine/"] {
+    display: none;
+}
 .elem_link {
     font-size: 14px;
     margin-bottom: 5px;
 }
-
+.creator {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 300;
+}
 #msg_place {
     padding: 3px;
     margin: 5px 0;

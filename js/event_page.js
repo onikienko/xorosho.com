@@ -35,15 +35,15 @@ function getRss(cb) {
     $.get('http://www.xorosho.com/engine/rss.php')
         .success(function (data) {
             try {
-                var $xml = $(data),
-                    news = [];
-                $xml.find("item").each(function () {
-                    var $this = $(this);
+                var news = [];
+                $(data).find('item').each(function () {
+                    var el = $(this);
                     news.push({
-                        title: $this.find("title").text(),
-                        link: $this.find("link").text(),
-                        description: $this.find("description").text().replace(/(<!--[\s\S]*?-->)|(<object[\s\S]*?<\/object>)/g, ''), //TODO убрать смайлики и прочие мусорные изображения
-                        pubDate: $this.find("pubDate").text()
+                        title: el.find('title').text(),
+                        link: el.find('link').text(),
+                        description: el.find('description').text().replace(/(<!--[\s\S]*?-->)|(<object[\s\S]*?<\/object>)/g, ''),
+                        pubDate: el.find('pubDate').text(),
+                        creator: el.find('creator').text()
                     });
                 });
                 answer = {status: 'ok', data: news};
@@ -61,8 +61,8 @@ function getRss(cb) {
 
 function handleRss(request) {
     if (request.status === 'ok') {
+        localStorage.rss = JSON.stringify(request.data);
         if (localStorage.last_pub !== request.data[0].pubDate) {
-            localStorage.rss = JSON.stringify(request.data);
             notify();
         }
     }
@@ -76,7 +76,9 @@ function starter() {
 
 chrome.runtime.onInstalled.addListener(function (details) {
     starter();
-    chrome.tabs.create({'url': 'options.html'});
+    if (details.reason === 'install' || (details.reason === 'update' && details.previousVersion === '0.4.3')) {
+        chrome.tabs.create({'url': 'options.html'});
+    }
 });
 
 chrome.runtime.onStartup.addListener(function () {
