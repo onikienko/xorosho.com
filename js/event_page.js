@@ -88,3 +88,14 @@ chrome.runtime.onStartup.addListener(function () {
 chrome.alarms.onAlarm.addListener(function () {
     getRss(handleRss);
 });
+
+chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
+    if (msg === 'tell_me_settings') {
+        sendResponse({
+            top_search_btn: localStorage.opt_top_search_btn,
+            bottom_search_btn: localStorage.opt_bottom_search_btn
+        });
+    } else {
+        sendResponse(false);
+    }
+});
