@@ -33,7 +33,14 @@ fieldset {
 }
 fieldset img {
     margin: 10px 0 10px 70px;
-    border: 1px solid #888888;
+    border: 1px solid #d3d3d3;
+}
+legend img {
+    margin: 0 3px -2px;
+    border: none;
+}
+legend i {
+    color: red;
 }
 i {
     color: #333333;

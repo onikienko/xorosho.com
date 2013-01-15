@@ -1,6 +1,9 @@
+/*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 function setDefaults() {
     localStorage.opt_top_search_btn = localStorage.opt_top_search_btn || 'on';
     localStorage.opt_bottom_search_btn = localStorage.opt_bottom_search_btn || 'on';
+    localStorage.opt_top_soundcloud_btn = localStorage.opt_top_soundcloud_btn || 'on';
+    localStorage.opt_bottom_soundcloud_btn = localStorage.opt_bottom_soundcloud_btn || 'on';
     localStorage.opt_check_time = localStorage.opt_check_time || '60';
     localStorage.opt_sound = localStorage.opt_sound || 'off';
     localStorage.last_pub = localStorage.last_pub || '';
@@ -30,7 +33,7 @@ function notify() {
     }
 }
 
-function getRss(cb) {
+function getRss(callback) {
     var answer = {};
     $.get('http://www.xorosho.com/engine/rss.php')
         .success(function (data) {
@@ -55,14 +58,14 @@ function getRss(cb) {
             answer = {status: 'error', data: 'Ошибка при получении rss'};
         })
         .complete(function () {
-            cb(answer);
+            callback(answer);
         });
 }
 
-function handleRss(request) {
-    if (request.status === 'ok') {
-        localStorage.rss = JSON.stringify(request.data);
-        if (localStorage.last_pub !== request.data[0].pubDate) {
+function handleRss(news) {
+    if (news.status === 'ok') {
+        localStorage.rss = JSON.stringify(news.data);
+        if (localStorage.last_pub !== news.data[0].pubDate) {
             notify();
         }
     }
@@ -93,7 +96,9 @@ chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg === 'tell_me_settings') {
         sendResponse({
             top_search_btn: localStorage.opt_top_search_btn,
-            bottom_search_btn: localStorage.opt_bottom_search_btn
+            bottom_search_btn: localStorage.opt_bottom_search_btn,
+            top_soundcloud_btn: localStorage.opt_top_soundcloud_btn,
+            bottom_soundcloud_btn: localStorage.opt_bottom_soundcloud_btn
         });
     } else {
         sendResponse(false);

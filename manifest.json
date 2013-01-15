@@ -1,6 +1,6 @@
 {
     "name": "xorosho.com +",
-    "version": "0.8.2",
+    "version": "0.8.3",
     "description": "Плюшки для xorosho.com",
     "manifest_version": 2,
     "minimum_chrome_version": "22",
@@ -32,6 +32,9 @@
     ],
     "web_accessible_resources": [
         "i/rutracker_16x16.ico",
+        "i/soundcloud.png",
+        "i/rutracker_big.png",
+        "i/soundcloud_big.png",
         "i/ico/icon_19.png"
     ]
 }

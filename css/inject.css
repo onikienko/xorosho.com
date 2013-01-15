@@ -1,7 +1,6 @@
-#search_btn {
-    margin-right: 15px;
+.search_btn {
+    margin-right: 12px;
 }
-#search_txt {
+#bottom_search {
     margin: 14px;
-    font-size: 14px;
 }

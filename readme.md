@@ -7,7 +7,10 @@ xorosho.com +
 **Основные возможности:**
 
 - встраивает на страницы релизов "хорошая музыка" и "хорошее кино" ссылки на поиск этих релизов на rutracker.org (настраивается)
+- также можно добавить ссылки для поиск артиста на soundcloude.com (только "хорошая музыка")
 - проверяет, по заданному расписанию, новости сайта и при их появлении выдает настраиваемые уведомления (иконка, звук)
 - в popup окне доступен поиск по xorosho.com, последние новости сайта и пара полезных ссылок
 
-Подробности, скриншоты - [Chrome web store] (https://chrome.google.com/webstore/detail/xoroshocom-%20/plogjmalladgjgnacgpnccmkocbdcoab)
+Подробности, скриншоты, установить - [Chrome web store] (https://chrome.google.com/webstore/detail/xoroshocom-%20/plogjmalladgjgnacgpnccmkocbdcoab)
+
+[Github] (https://github.com/onikienko/xorosho.com)

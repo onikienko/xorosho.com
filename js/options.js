@@ -1,13 +1,14 @@
-$(document).ready(function () {
+/*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
+$(function () {
     var audioElement = new Audio();
 
     //формирование страницы согласно параметрам, сохраненным в localStorage
-    if (localStorage.opt_top_search_btn === 'on') {
-        $('input#opt_top_search_btn').attr('checked', 'checked');
-    }
-    if (localStorage.opt_bottom_search_btn === 'on') {
-        $('input#opt_bottom_search_btn').attr('checked', 'checked');
-    }
+    $('input:checkbox').each(function () {
+        var el = $(this);
+        if (localStorage[el.attr('id')] === 'on') {
+            el.attr('checked', 'checked');
+        }
+    });
     $('#opt_check_time [value="' + localStorage.opt_check_time + '"]').attr("selected", "selected");
     $('input[name="opt_sound"][id="' + localStorage.opt_sound + '"]').attr('checked', 'checked');
 
