@@ -1,5 +1,6 @@
 /*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
-function extXorosho(settings) {
+//согласно манифесту включается только в категориях музыка и кино
+chrome.extension.sendMessage('tell_me_settings', function (settings) {
     var query_strings = {   //строки для поисковых запросов
             before_slash: false,
             artist: false
@@ -26,10 +27,10 @@ function extXorosho(settings) {
                 query_string_type: 'artist'
             }
         },
-        ext_ico = chrome.extension.getURL("../i/ico/icon_19.png"),
+    //тип релиза или вообще не релиз (если корень категории)
         current_page_type = (function () {
             var page_url = document.location.href;
-            //убеждаюсь, что это релизы, а не корень категорий
+            //что это релизы, а не корень категорий
             if (page_url.search(/xoroshaya_muzika\/[\s\S]/) !== -1) {
                 return 'music';
             }
@@ -40,9 +41,11 @@ function extXorosho(settings) {
         }());
 
     function findQueryStrings() {
-        //принимаем, что все заголовки новости создаются по шаблону Артист - Альбом (год) / жанры
         var news_title = $('h1:eq(0)').text();
+        //принимаю, что все заголовки новости создаются по шаблону Артист - Альбом (год) / жанры
+        //фильмы - после первого слеша либо оригинальное название, либо жанры, тоже ОК
         if (typeof news_title === 'string') {
+            //строка до слеша
             query_strings.before_slash = (function () {
                 var str = news_title.slice(0, news_title.indexOf('/'));
                 if (str.length >= 4) {
@@ -50,6 +53,7 @@ function extXorosho(settings) {
                 }
                 return false;
             }());
+            //артист - до первого " - " в заголовке новости
             query_strings.artist = (function () {
                 var artist_end = news_title.indexOf(' - '),
                     str;
@@ -73,6 +77,7 @@ function extXorosho(settings) {
             findQueryStrings();
             for (engine in search_engines) {
                 if (search_engines.hasOwnProperty(engine)) {
+                    //строка для поискового запроса в зависимости от нужного для конкретного поискового движка
                     query_str = query_strings[search_engines[engine].query_string_type];
                     if (query_str) {
                         if (search_engines[engine].top_btn === 'on') {
@@ -96,8 +101,4 @@ function extXorosho(settings) {
     }
 
     go();
-}
-
-chrome.extension.sendMessage('tell_me_settings', function (resp) {
-    extXorosho(resp);
 });
