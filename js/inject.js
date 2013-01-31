@@ -1,7 +1,8 @@
 /*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 //согласно манифесту включается только в категориях музыка и кино
 chrome.extension.sendMessage('tell_me_settings', function (settings) {
-    var query_strings = {   //строки для поисковых запросов
+    var max_query_str_length = 61, //рутрекер не поддерживает поисковый запрос длиней 137 символов
+        query_strings = {   //строки для поисковых запросов
             before_slash: false,
             artist: false
         },
@@ -47,8 +48,15 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
         if (typeof news_title === 'string') {
             //строка до слеша
             query_strings.before_slash = (function () {
-                var str = news_title.slice(0, news_title.indexOf('/'));
+                var str = news_title.slice(0, news_title.indexOf('/')),
+                    last_word_start;
                 if (str.length >= 4) {
+                    if (str.length > max_query_str_length) {
+                        str = str.slice(0, max_query_str_length);
+                        //для корректной работы поиска нужно обрезать до последнего слова (пробела)
+                        last_word_start = str.lastIndexOf(' ');
+                        str = last_word_start !== -1 ? str.slice(0, last_word_start) : str;
+                    }
                     return str;
                 }
                 return false;
