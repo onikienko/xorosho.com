@@ -2,8 +2,13 @@
 function setDefaults() {
     localStorage.opt_top_search_btn = localStorage.opt_top_search_btn || 'on';
     localStorage.opt_bottom_search_btn = localStorage.opt_bottom_search_btn || 'on';
+
     localStorage.opt_top_soundcloud_btn = localStorage.opt_top_soundcloud_btn || 'on';
     localStorage.opt_bottom_soundcloud_btn = localStorage.opt_bottom_soundcloud_btn || 'on';
+
+    localStorage.opt_top_lastfm_btn = localStorage.opt_top_lastfm_btn || 'on';
+    localStorage.opt_bottom_lastfm_btn = localStorage.opt_bottom_lastfm_btn || 'on';
+
     localStorage.opt_check_time = localStorage.opt_check_time || '60';
     localStorage.opt_sound = localStorage.opt_sound || 'off';
     localStorage.last_pub = localStorage.last_pub || '';
@@ -98,7 +103,9 @@ chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
             top_search_btn: localStorage.opt_top_search_btn,
             bottom_search_btn: localStorage.opt_bottom_search_btn,
             top_soundcloud_btn: localStorage.opt_top_soundcloud_btn,
-            bottom_soundcloud_btn: localStorage.opt_bottom_soundcloud_btn
+            bottom_soundcloud_btn: localStorage.opt_bottom_soundcloud_btn,
+            top_lastfm_btn: localStorage.opt_top_lastfm_btn,
+            bottom_lastfm_btn: localStorage.opt_bottom_lastfm_btn
         });
     } else {
         sendResponse(false);

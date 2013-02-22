@@ -1,7 +1,7 @@
 /*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 //согласно манифесту включается только в категориях музыка и кино
 chrome.extension.sendMessage('tell_me_settings', function (settings) {
-    var max_query_str_length = 61, //рутрекер не поддерживает поисковый запрос длиней 137 символов
+    var max_query_str_length = 61, //рутрекер не поддерживает поисковый запрос длиней 61 символов
         query_strings = {   //строки для поисковых запросов
             before_slash: false,
             artist: false
@@ -25,6 +25,16 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
                 title: 'Искать исполнителя на soundcloud.com',
                 top_btn: settings.top_soundcloud_btn || 'on',
                 bottom_btn: settings.bottom_soundcloud_btn || 'on',
+                query_string_type: 'artist'
+            },
+            lastfm: {
+                ico: chrome.extension.getURL("../i/lastfm_16.ico"),
+                ico_big: chrome.extension.getURL("../i/lastfm_big.gif"),
+                lnk: 'http://www.lastfm.ru/search?q=',
+                category: ['music'],
+                title: 'Искать исполнителя на lastfm',
+                top_btn: settings.top_lastfm_btn || 'on',
+                bottom_btn: settings.bottom_lastfm_btn || 'on',
                 query_string_type: 'artist'
             }
         },
@@ -63,15 +73,18 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
             }());
             //артист - до первого " - " в заголовке новости
             query_strings.artist = (function () {
-                var artist_end = news_title.indexOf(' - '),
-                    str;
-                if (artist_end !== -1) {
-                    str = news_title.slice(0, artist_end);
-                    if (str.length >= 2) {
-                        return str;
+                function slicer(s) {
+                    var artist_end = query_strings.before_slash.indexOf(s),
+                        str;
+                    if (artist_end !== -1) {
+                        str = query_strings.before_slash.slice(0, artist_end);
+                        if (str.length >= 2) {
+                            return str;
+                        }
                     }
+                    return false;
                 }
-                return false;
+                return slicer(' - ') || slicer(' – ') || slicer(' — '); // здесь проверяются три типа дефисов
             }());
         }
     }
