@@ -1,19 +1,27 @@
 /*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 function setDefaults() {
-    localStorage.opt_top_search_btn = localStorage.opt_top_search_btn || 'on';
-    localStorage.opt_bottom_search_btn = localStorage.opt_bottom_search_btn || 'on';
+    var defaults = {
+            opt_top_search_btn: 'on',
+            opt_bottom_search_btn: 'on',
 
-    localStorage.opt_top_soundcloud_btn = localStorage.opt_top_soundcloud_btn || 'on';
-    localStorage.opt_bottom_soundcloud_btn = localStorage.opt_bottom_soundcloud_btn || 'on';
+            opt_top_soundcloud_btn: 'on',
+            opt_bottom_soundcloud_btn: 'on',
 
-    localStorage.opt_top_lastfm_btn = localStorage.opt_top_lastfm_btn || 'on';
-    localStorage.opt_bottom_lastfm_btn = localStorage.opt_bottom_lastfm_btn || 'on';
+            opt_top_lastfm_btn: 'on',
+            opt_bottom_lastfm_btn: 'on',
 
-    localStorage.opt_check_time = localStorage.opt_check_time || '60';
-    localStorage.opt_sound = localStorage.opt_sound || 'off';
-    localStorage.last_pub = localStorage.last_pub || '';
-    localStorage.already_played = localStorage.already_played || 'no';
-    localStorage.rss = localStorage.rss || '[]';
+            opt_check_time: '60',
+            opt_sound: 'off',
+            last_pub: '',
+            already_played: 'no',
+            rss: '[]',
+
+            site_search: 'xorosho'
+        },
+        d;
+    for (d in defaults) {
+        localStorage[d] = localStorage[d] || defaults[d];
+    }
 }
 
 function setAlarm() {

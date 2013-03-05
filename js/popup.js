@@ -16,19 +16,41 @@ $(function () {
         news_el.append(html);
     }
 
-    function setEventsHandlers() {
+    //init
+    (function () {
         var search_input = $('#search_place input');
+        $('#site_search [value=' + localStorage.site_search + ']').attr('selected', 'selected');
+
+        function setPlaceholder() {
+            search_input.attr('placeholder', localStorage.site_search === 'xorosho' ? 'Искать на Xorosho. Мин. 4 знака, латиница' : 'Искать на Xorosho двжиком Google');
+        }
+
+        function xoroshoSearch(query) {
+            if (localStorage.site_search === 'xorosho') {
+                if (query.length >= 4) {
+                    chrome.tabs.create({'url': 'http://www.xorosho.com/index.php?do=search&subaction=search&story=' + encodeURIComponent(query)});
+                }
+            } else {
+                chrome.tabs.create({'url': 'https://www.google.com/#hl=ru&newwindow=1&q=site:xorosho.com+' + encodeURIComponent(query)});
+            }
+        }
+
         search_input.keydown(function (event) {
-            if (event.keyCode === 13 && $(this).val().length >= 4) {
-                chrome.tabs.create({'url': 'http://www.xorosho.com/index.php?do=search&subaction=search&story=' + encodeURIComponent($(this).val())});
+            var val = $(this).val();
+            if (event.keyCode === 13 && val) {
+                xoroshoSearch(val);
             }
         });
-        $('#search_place img:eq(0)').click(function () {
-            var query = search_input.val();
-            if (query.length >= 4) {
-                chrome.tabs.create({'url': 'http://www.xorosho.com/index.php?do=search&subaction=search&story=' + encodeURIComponent(query)});
+
+        $('#site_search').change(function () {
+            localStorage.site_search = $(this).val();
+            setPlaceholder();
+            if (search_input.val()) {
+                xoroshoSearch(search_input.val());
             }
+            return false;
         });
+
         $('#action_place').on('click', 'img', function (event) {
             switch (event.target.id) {
             case 'btn_upd':
@@ -56,9 +78,10 @@ $(function () {
             }
             return false;
         });
-    }
 
-    setEventsHandlers();
+        setPlaceholder();
+    }());
+
     localStorage.already_played = 'no';
     chrome.browserAction.setBadgeText({text: ''});
     localStorage.last_pub = rss[0].pubDate || '';

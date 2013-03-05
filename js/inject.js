@@ -84,7 +84,8 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
                     }
                     return false;
                 }
-                return slicer(' - ') || slicer(' – ') || slicer(' — '); // здесь проверяются три типа дефисов
+                // здесь проверяются разные типы дефисов, хотя выглядят почти одинаково
+                return slicer(' - ') || slicer(' – ') || slicer(' — ') || slicer(' ‎- ');
             }());
         }
     }

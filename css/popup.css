@@ -37,8 +37,13 @@ section {
     margin: 0 8px;
 }
 #search_place input {
-    width: 330px;
+    width: 246px;
     padding-left: 5px;
+    font-size: 12px;
+}
+#search_place select {
+    width: 104px;
+    font-size: 11px;
 }
 #search_place img {
     margin-bottom: -3px;
