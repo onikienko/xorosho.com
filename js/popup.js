@@ -22,7 +22,7 @@ $(function () {
         $('#site_search [value=' + localStorage.site_search + ']').attr('selected', 'selected');
 
         function setPlaceholder() {
-            search_input.attr('placeholder', localStorage.site_search === 'xorosho' ? 'Искать на Xorosho. Мин. 4 знака, латиница' : 'Искать на Xorosho двжиком Google');
+            search_input.attr('placeholder', localStorage.site_search === 'xorosho' ? 'Искать на Xorosho. Мин. 4 знака, латиница' : 'Искать на Xorosho движком Google');
         }
 
         function xoroshoSearch(query) {

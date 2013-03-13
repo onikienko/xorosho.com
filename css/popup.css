@@ -44,6 +44,7 @@ section {
 #search_place select {
     width: 104px;
     font-size: 11px;
+    color: #333333;
 }
 #search_place img {
     margin-bottom: -3px;
@@ -68,7 +69,7 @@ section {
 }
 .creator {
     text-align: right;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 300;
 }
 #msg_place {
