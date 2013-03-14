@@ -34,12 +34,15 @@ hr {
     border: none;
     background-color: #e5e5e5;
     height: 1px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 fieldset {
     border: 1px solid #e5e5e5;
     margin-top: 20px;
     border-radius: 3px;
+}
+input {
+    margin-left: 25px;
 }
 .red {
     color: red;

@@ -1,6 +1,6 @@
 {
     "name": "xorosho.com +",
-    "version": "0.8.9",
+    "version": "0.8.9.1",
     "description": "Плюшки для xorosho.com",
     "manifest_version": 2,
     "minimum_chrome_version": "22",
@@ -15,14 +15,14 @@
     },
     "options_page": "options.html",
     "background": {
-        "scripts": ["js/lib/jquery-1.8.2.min.js", "js/event_page.js"],
+        "scripts": ["js/lib/jquery-1.9.1.min.js", "js/news_checker.js", "js/event_page.js"],
         "persistent": false
     },
     "content_scripts": [
         {
             "matches": ["http://*.xorosho.com/xoroshaya_muzika/*", "http://*.xorosho.com/xoroshee_kino/*"],
             "css": ["css/inject.css"],
-            "js": ["js/lib/jquery-1.8.2.min.js", "js/inject.js"]
+            "js": ["js/lib/jquery-1.9.1.min.js", "js/inject.js"]
         }
     ],
     "permissions": [

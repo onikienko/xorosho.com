@@ -1,4 +1,3 @@
-/*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 $(function () {
     var rss = JSON.parse(localStorage.rss),
         news_el = $('#news');
@@ -13,7 +12,10 @@ $(function () {
                 '<div class="elem_link"><a href="' + news[i].link + '" target="_blank">' + news[i].title + '</a></div><div>' + news[i].description +
                 '</div><div class="creator">Автор: ' + news[i].creator + '</div></div><hr>';
         }
-        news_el.append(html);
+        news_el.html(html);
+    }
+    function showError(msg) {
+        news_el.prepend('<div id="msg_place">' + msg + '</div>').find('#msg_place');
     }
 
     //init
@@ -56,17 +58,14 @@ $(function () {
             case 'btn_upd':
                 var img = $(this);
                 img.attr('src', 'i/ajax-loader.gif');
-                chrome.runtime.getBackgroundPage(function (bP) {
-                    bP.getRss(function (answer) {
-                        img.attr('src', 'i/update.png');
-                        if (answer.status === 'error') {
-                            news_el.prepend('<div id="msg_place">' + answer.data + '</div>').find('#msg_place');
-                        } else {
-                            news_el.empty();
-                            bP.handleRss(answer);
-                            showNews(answer.data);
-                        }
-                    });
+                getRss(function (news) {
+                    img.attr('src', 'i/update.png');
+                    if (news.status === 'error') {
+                        showError(news.data);
+                    } else if (localStorage.last_pub !== news.data[0].pubDate) {
+                        localStorage.last_pub = rss[0].pubDate;
+                        showNews(news.data);
+                    }
                 });
                 break;
             case 'btn_opt':

@@ -14,7 +14,7 @@ It's Google Chrome extension for russian-speaking community xorosho.com. There i
 - по заданному расписанию проверяет новости сайта и при их появлении выдает настраиваемые уведомления (иконка, звук)
 - в popup окне доступен поиск по xorosho.com (с помощью форумного движка или google site search), последние новости сайта и пара полезных ссылок
 
-Подробности, скриншоты, а также установить расширение - [Chrome web store] (https://chrome.google.com/webstore/detail/xoroshocom-%20/plogjmalladgjgnacgpnccmkocbdcoab)
+Подробности, скриншоты, установить - [Chrome web store] (https://chrome.google.com/webstore/detail/xoroshocom-%20/plogjmalladgjgnacgpnccmkocbdcoab)
 
 [Github] (https://github.com/onikienko/xorosho.com)
 

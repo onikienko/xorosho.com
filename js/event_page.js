@@ -1,4 +1,3 @@
-/*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 function setDefaults() {
     var defaults = {
             opt_top_search_btn: 'on',
@@ -20,7 +19,9 @@ function setDefaults() {
         },
         d;
     for (d in defaults) {
-        localStorage[d] = localStorage[d] || defaults[d];
+        if (defaults.hasOwnProperty(d)) {
+            localStorage[d] = localStorage[d] || defaults[d];
+        }
     }
 }
 
@@ -44,35 +45,6 @@ function notify() {
         }
         localStorage.already_played = 'yes';
     }
-}
-
-function getRss(callback) {
-    var answer = {};
-    $.get('http://www.xorosho.com/engine/rss.php')
-        .success(function (data) {
-            try {
-                var news = [];
-                $(data).find('item').each(function () {
-                    var el = $(this);
-                    news.push({
-                        title: el.find('title').text(),
-                        link: el.find('link').text(),
-                        description: el.find('description').text().replace(/(<!--[\s\S]*?-->)|(<object[\s\S]*?<\/object>)/g, ''),
-                        pubDate: el.find('pubDate').text(),
-                        creator: el.find('creator').text()
-                    });
-                });
-                answer = {status: 'ok', data: news};
-            } catch (e) {
-                answer = {status: 'error', data: 'Ошибка разбора rss'};
-            }
-        })
-        .error(function () {
-            answer = {status: 'error', data: 'Ошибка при получении rss'};
-        })
-        .complete(function () {
-            callback(answer);
-        });
 }
 
 function handleRss(news) {
@@ -106,15 +78,16 @@ chrome.alarms.onAlarm.addListener(function () {
 });
 
 chrome.extension.onMessage.addListener(function (msg, sender, sendResponse) {
+    var opt,
+        settings = {};
     if (msg === 'tell_me_settings') {
-        sendResponse({
-            top_search_btn: localStorage.opt_top_search_btn,
-            bottom_search_btn: localStorage.opt_bottom_search_btn,
-            top_soundcloud_btn: localStorage.opt_top_soundcloud_btn,
-            bottom_soundcloud_btn: localStorage.opt_bottom_soundcloud_btn,
-            top_lastfm_btn: localStorage.opt_top_lastfm_btn,
-            bottom_lastfm_btn: localStorage.opt_bottom_lastfm_btn
-        });
+        for (opt in localStorage) {
+            //если начинается с opt_ и заканчивается на _btn - то это нужные настройки кнопок, остальное не отправляем
+            if (localStorage.hasOwnProperty(opt) && opt.indexOf('opt_') === 0 && /_btn$/.test(opt)) {
+                settings[opt] = localStorage[opt];
+            }
+        }
+        sendResponse(settings);
     } else {
         sendResponse(false);
     }

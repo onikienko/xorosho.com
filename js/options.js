@@ -1,4 +1,3 @@
-/*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 $(function () {
     var audioElement = new Audio();
 
