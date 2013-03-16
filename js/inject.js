@@ -1,8 +1,7 @@
 /*global localStorage: false, console: false, $: false, Audio: false, chrome: false, window: false, document: false */
 //согласно манифесту включается только в категориях музыка и кино
 chrome.extension.sendMessage('tell_me_settings', function (settings) {
-    console.log(settings);
-
+    "use strict";
     var CONF = {
             max_query_str_length: 61, //рутрекер не поддерживает поисковый запрос длиней 61 символов
             search_engines: {
