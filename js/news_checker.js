@@ -9,7 +9,7 @@ function getRss(callback) {
                     news.push({
                         title: el.find('title').text(),
                         link: el.find('link').text(),
-                        description: el.find('description').text().replace(/(<!--[\s\S]*?-->)|(<object[\s\S]*?<\/object>)/g, ''),
+                        description: el.find('description').text().replace(/(<!--[\s\S]*?-->)|(<object[\s\S]*?<\/object>)/g, '').replace('onclick="return hs.expand(this)"', ''),
                         pubDate: el.find('pubDate').text(),
                         creator: el.find('creator').text()
                     });

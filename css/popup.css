@@ -7,71 +7,102 @@ body {
     color: #666666;
     font-family: Tahoma, sans-serif;
 }
+
 header {
     font-size: 18px;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     margin: 6px 5px 2px 10px;
 }
+
 header div {
     display: inline;
 }
+
 #logo_place img {
     margin: 0 4px -5px 0;
     cursor: pointer;
 }
+
+#logo_place a {
+    color: #666666;
+    text-decoration: none;
+    font-size: 18px;
+}
+
 #action_place {
     float: right;
 }
+
 #action_place img {
     cursor: pointer;
     margin-left: 2px;
 }
+
 hr {
     border: none;
     background-color: #e5e5e5;
     height: 1px;
     width: 97%;
 }
+
 section {
-    margin: 0 8px;
+    margin: 8px 8px;
 }
+
+.right {
+    float: right;
+    padding: 0;
+    margin-right: -3px;
+}
+
 #search_place input {
     width: 246px;
     padding-left: 5px;
     font-size: 12px;
 }
+
 #search_place select {
-    width: 104px;
-    font-size: 11px;
+    width: 124px;
+    font-size: 12px;
     color: #333333;
 }
+
 #search_place img {
-    margin-bottom: -3px;
+    /*margin-bottom: -3px;*/
     cursor: pointer;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
 }
+
 .news_elem {
     font-size: 11px;
     margin-top: 12px;
     color: black;
 }
+
 .news_elem img {
     margin: 5px;
     width: 100px;
 }
+
 /*прячу смайлы*/
 .news_elem img[src*="http://www.xorosho.com/engine/"] {
     display: none;
 }
+
 .elem_link {
     font-size: 14px;
     margin-bottom: 5px;
 }
+
 .creator {
     text-align: right;
     font-size: 12px;
     font-weight: 300;
 }
+
 #msg_place {
     padding: 3px;
     margin: 5px 0;
