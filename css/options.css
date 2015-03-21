@@ -5,65 +5,85 @@ body {
     font-family: Arial, sans-serif;
     font-size: 15px;
 }
+
 #wrap {
     padding: 30px;
     background-color: #ffffff;
     border: 1px solid #dddddd;
     border-radius: 5px;
 }
+
 header {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
+
 header img {
-    float: left;
+    vertical-align: middle;
 }
+
 p {
     margin: 5px;
 }
+
 h1 {
     margin-top: 0;
     color: #666666;
 }
+
 h4 {
     margin: 12px 0;
 }
+
 h4 img {
     margin: 0 3px -3px;
 }
+
 hr {
     border: none;
     background-color: #e5e5e5;
     height: 1px;
     margin: 15px 0;
 }
+
 fieldset {
     border: 1px solid #e5e5e5;
     margin-top: 20px;
     border-radius: 3px;
 }
+
 input {
     margin-left: 25px;
 }
+
 .red {
     color: red;
 }
+
 .screens {
     vertical-align: top;
     margin-left: 12px;
 }
+
 i {
     color: #333333;
     font-size: 13px;
 }
+
 legend {
     font-weight: bold;
 }
+
 footer {
     margin-top: 30px;
     text-align: right;
     font-size: 12px;
 }
+
 footer a {
     color: #093;
 }
 
+#ua_flag {
+    background: url("../i/ua_1px.png") repeat-x;
+    color: #009933;
+}
