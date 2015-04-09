@@ -22,11 +22,13 @@ $(function () {
 
     //init
     (function () {
-        var search_input = $('#search_place input');
-        $('#site_search [value=' + localStorage.site_search + ']').attr('selected', 'selected');
+        var $search_input = $('#search_place').find('input'),
+            $site_search = $('#site_search');
+
+        $site_search.find('[value=' + localStorage.site_search + ']').attr('selected', 'selected');
 
         function setPlaceholder() {
-            search_input.attr('placeholder', localStorage.site_search === 'xorosho' ? 'Искать на Xorosho. Мин. 4 знака, латиница' : 'Искать на Xorosho движком Google');
+            $search_input.attr('placeholder', localStorage.site_search === 'xorosho' ? 'Искать на Xorosho. Мин. 4 знака, латиница' : 'Искать на Xorosho движком Google');
         }
 
         function xoroshoSearch(query) {
@@ -39,7 +41,7 @@ $(function () {
             }
         }
 
-        search_input.keydown(function (event) {
+        $search_input.keydown(function (event) {
             var val = $(this).val();
             
             if (event.keyCode === 13 && val) {
@@ -47,11 +49,11 @@ $(function () {
             }
         });
 
-        $('#site_search').change(function () {
+        $site_search.change(function () {
             localStorage.site_search = $(this).val();
             setPlaceholder();
-            if (search_input.val()) {
-                xoroshoSearch(search_input.val());
+            if ($search_input.val()) {
+                xoroshoSearch($search_input.val());
             }
             return false;
         });
