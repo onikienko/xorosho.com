@@ -3,9 +3,10 @@ $(function () {
 
     //формирование страницы согласно параметрам, сохраненным в localStorage
     $('input:checkbox').each(function () {
-        var el = $(this);
-        if (localStorage[el.attr('id')] === 'on') {
-            el.attr('checked', 'checked');
+        var $el = $(this);
+
+        if (localStorage[$el.attr('id')] === 'on') {
+            $el.attr('checked', 'checked');
         }
     });
     $('#opt_check_time [value="' + localStorage.opt_check_time + '"]').attr("selected", "selected");

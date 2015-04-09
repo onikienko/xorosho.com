@@ -41,6 +41,7 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
 
     function PageInfo() {
         var self = this;
+
         // тип релиза или false если корень категории
         this.type = (function () {
             var page_url = document.location.href;
@@ -60,12 +61,14 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
                     artist: ''
                 },
                 news_title = $('h1:eq(0)').text();
+            
             //принимаю, что все заголовки новости создаются по шаблону Артист - Альбом (год) / жанры
             //фильмы - после первого слеша либо оригинальное название, либо жанры, тоже ОК
             if (self.type && typeof news_title === 'string') {
                 strings.before_slash = (function () {
                     var str = news_title.slice(0, news_title.indexOf('/')),
                         last_word_start;
+
                     if (str.length >= 4) {
                         if (str.length > CONF.max_query_str_length) {
                             str = str.slice(0, CONF.max_query_str_length);
@@ -83,6 +86,7 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
                     function slicer(s) {
                         var artist_end = strings.before_slash.indexOf(s),
                             str;
+
                         if (artist_end !== -1) {
                             str = strings.before_slash.slice(0, artist_end);
                             if (str.length >= 2) {
@@ -123,6 +127,7 @@ chrome.extension.sendMessage('tell_me_settings', function (settings) {
             button,
             top_html = '',
             bottom_html = '';
+
         if (page.type) {
             for (engine in engines) {
                 if (engines.hasOwnProperty(engine) && engines[engine].category.indexOf(page.type) !== -1) {
